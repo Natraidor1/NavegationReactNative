@@ -9,7 +9,7 @@ import {
   ScrollView
 } from 'react-native';
  
-import useFetchUser from '../hooks/useFetchUser';
+import useFetchUser from '../hooks/useFetchUser.js';
  
 const AddUser = () => {
   const {
@@ -19,7 +19,8 @@ const AddUser = () => {
     setNombre,
     setEdad,
     setCorreo,
-    handleGuardar
+    handleGuardar,
+
   } = useFetchUser();
  
   return (
@@ -56,6 +57,7 @@ const AddUser = () => {
       <TouchableOpacity style={styles.button} onPress={handleGuardar}>
         <Text style={styles.buttonText}>Guardar</Text>
       </TouchableOpacity>
+      
     </ScrollView>
   );
 };

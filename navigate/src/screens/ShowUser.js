@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,21 @@ import {
   ActivityIndicator,
   SafeAreaView,
 } from "react-native";
+ 
 import CardUser from "../components/Users/CardUser";
  
 import useFetchUser from "../hooks/useFetchUser";
+import { useFocusEffect } from "@react-navigation/native";
  
 const ShowUser = () => {
-  const { usuarios, loading } = useFetchUser();
-  console.log(usuarios);
+  const { usuarios, loading, fetchUsuarios, deleteUser } = useFetchUser();
+ 
+  // Se ejecuta cada vez que esta pantalla se enfoca
+  useFocusEffect(
+    useCallback(() => {
+      fetchUsuarios();
+    }, [])
+  );
  
   return (
     <SafeAreaView style={styles.container}>
@@ -38,7 +46,7 @@ const ShowUser = () => {
         <FlatList
           data={usuarios}
           keyExtractor={(user) => user.id.toString()}
-          renderItem={({ item }) => <CardUser user={item} />}
+          renderItem={({ item }) => <CardUser user={item} deleteUser= {deleteUser} />}
           contentContainerStyle={styles.listContainer}
         />
       )}
@@ -101,5 +109,3 @@ const styles = StyleSheet.create({
 });
  
 export default ShowUser;
- 
- 

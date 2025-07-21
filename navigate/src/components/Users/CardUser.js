@@ -1,11 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
+import Buttons from "../Buttons";
+
+
+
  
-const CardUser = ({user}) => {
+const CardUser = ({user,deleteUser }) => {
   return (
         <View style={styles.card}>
           <Text style={styles.cardTitle}>{user.nombre}</Text>
           <Text style={styles.cardText}>Edad: {user.edad}</Text>
           <Text style={styles.cardText}>Correo: {user.correo}</Text>
+
+          <Buttons
+          texto={"Eliminar usuario"}
+          action={()=> deleteUser(user.id)}
+          />
         </View>
    );
 }
